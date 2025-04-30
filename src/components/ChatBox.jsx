@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import './ChatBox.css';
+import { getElenco, getJogos, getResultado, getCuriosidade } from '../services/api';
+
 
 export default function ChatBox() {
   const [messages, setMessages] = useState([
@@ -10,23 +12,57 @@ export default function ChatBox() {
   ]);
   const [input, setInput] = useState('');
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
-
+  
     const userMessage = { sender: 'user', text: input };
-    const response = getBotResponse(input.toLowerCase());
-
-    setMessages([...messages, userMessage, { sender: 'bot', text: response }]);
+    const response = await getBotResponse(input.toLowerCase());
+  
+    const botMessage = {
+      sender: 'bot',
+      text: typeof response === 'string' ? response : JSON.stringify(response)
+    };
+  
+    setMessages(prev => [...prev, userMessage, botMessage]);
     setInput('');
   };
+  
 
-  const getBotResponse = (msg) => {
-    if (msg.includes('/help')) return 'Comandos disponíveis: /jogos, /elenco, /curiosidade';
-    if (msg.includes('/jogos')) return '🎮 Próximo jogo: FURIA vs G2 – 25/04 às 18h.';
-    if (msg.includes('/elenco')) return '👥 arT, KSCERATO, yuurih, FalleN, chelo.';
-    if (msg.includes('/curiosidade')) return '🔥 A FURIA foi o 1º time BR a vencer a IEM NY.';
+  const getBotResponse = async (msg) => {
+    if (msg.includes('/help')) {
+      return 'Comandos disponíveis: /jogos, /elenco, /curiosidade, /resultado';
+    }
+  
+    if (msg.includes('/jogos')) {
+      return 'Implementando...';
+    }
+  
+    if (msg.includes('/elenco')) {
+      const elenco = await getElenco();
+  
+      if (!elenco || elenco.length === 0) {
+        return 'Não foi possível carregar o elenco.';
+      }
+  
+      const resposta = [
+        '**Elenco atual da FURIA:**',
+        ...elenco.map(j => `🎯 ${j.nickname} (${j.nome})`)
+      ].join('\n');
+  
+      return resposta;
+    }
+  
+    if (msg.includes('/curiosidade')) {
+      return '🔥 A FURIA foi o 1º time BR a vencer a IEM NY.';
+    }
+  
+    if (msg.includes('/resultado')) {
+      return 'Implementando...';
+    }
+  
     return '🤖 Comando não reconhecido. Tente /help.';
   };
+  
 
   return (
     <div className="chat-wrapper">
@@ -41,7 +77,17 @@ export default function ChatBox() {
               {msg.sender === 'bot' && (
                 <img src="/icon-robot.png" alt="Bot" className="bot-icon" />
               )}
-              <div className="chat-bubble">{msg.text}</div>
+              <div className="chat-bubble">
+                {typeof msg.text === 'string'
+                  ? msg.text.split('\n').map((line, index) => {
+                    if (line.startsWith('**') && line.endsWith('**')) {
+                      return <strong key={index}>{line.replace(/\*\*/g, '')}</strong>;
+                    }
+                    return <div key={index}>{line}</div>;
+                  })
+                  : <div>{JSON.stringify(msg)}</div>}
+              </div>
+
             </div>
           ))}
         </div>

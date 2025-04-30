@@ -1,12 +1,83 @@
-# React + Vite
+# FuriosoBot - Chat da FURIA com Backend Flask + Frontend React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![FURIA Logo](public/logo.png)
 
-Currently, two official plugins are available:
+FuriosoBot é um chatbot temático da FURIA Esports integrado a um sistema web moderno, com frontend em React e backend em Flask. Ele permite interação com comandos personalizados que fornecem informações reais sobre o time de CS:GO da FURIA, consumindo dados da API pública da HLTV.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Funcionalidades
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Comandos Disponíveis no Chat:
+
+- `/help` - Exibe a lista de comandos disponíveis
+- `/elenco` - Mostra o elenco atual da FURIA com nome real e nickname
+- `/jogos` - Lista os próximos jogos marcados da FURIA (em breve)
+- `/resultado` - Exibe os dois últimos jogos da FURIA com placar e adversário (em breve)
+- `/curiosidade` - Retorna uma curiosidade aleatória sobre a FURIA CS
+
+### Experiência Visual:
+- Interface moderna com logo e ícone da FURIA
+- Botão do Discord com animação ao passar o mouse
+- Respostas formatadas com emojis, negrito e quebras de linha
+
+---
+
+## ⚙️ Como Rodar Localmente
+
+### Requisitos
+- Node.js (v18+)
+- Python (3.9+)
+- Pip (instalador do Python)
+
+### 1. Instalar dependências do Frontend
+```bash
+cd furia-chat
+npm install
+```
+
+### 2. Iniciar o Frontend
+```bash
+npm run dev
+```
+> Acesse em: [http://localhost:5173](http://localhost:5173)
+
+### 3. Instalar dependências do Backend
+```bash
+cd backend
+pip install -r requirements.txt
+```
+
+### 4. Rodar o Backend Flask
+```bash
+python app.py
+```
+> A API ficará acessível em: [http://localhost:5000](http://localhost:5000)
+
+---
+
+## 🌍 Tecnologias Utilizadas
+
+- **Frontend:** React + Vite + CSS
+- **Backend:** Flask + Flask-CORS
+- **API de dados:** [hltv-api.vercel.app](https://hltv-api.vercel.app/)
+
+---
+
+## 📈 Expansões Futuras
+
+- Integração com Discord
+- Comando `/jogos` com dados reais
+- Comando `/resultado` com placares reais
+- Painel de admin para configurar respostas e curiosidades
+
+---
+
+## 🙏 Contribuição
+Sinta-se à vontade para abrir issues, propor melhorias ou enviar PRs. É um projeto pessoal, mas a comunidade FURIOSA é bem-vinda!
+
+---
+
+## 🚫 Aviso
+Este projeto não é afiliado oficialmente à FURIA Esports. Utiliza apenas dados públicos com fins educacionais e de demonstração.
+
