@@ -1,4 +1,4 @@
-# FuriosoBot - Chat da FURIA com Backend Flask + Frontend React
+# FuriosoBot - Chat da FURIA com Backend Flask + Frontend React (CHALLENGE #1)
 
 ![FURIA Logo](public/logo.png)
 
