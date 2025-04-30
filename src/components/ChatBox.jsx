@@ -56,6 +56,12 @@ export default function ChatBox() {
           />
         </div>
       </div>
+      <div className="discord-section">
+        <a href="#" className="discord-button" title="Adicionar no Discord">
+          <img src="/discord-logo.png" alt="Discord Logo" className="discord-logo" />
+        </a>
+        <p>Obtenha o FuriosoBot em seu servidor</p>
+      </div>
     </div>
   );
 }
